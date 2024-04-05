@@ -1,0 +1,1120 @@
+	.file	"main.c"
+	.text
+	.p2align 4,,15
+	.globl	_swap
+	.def	_swap;	.scl	2;	.type	32;	.endef
+_swap:
+LFB12:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %edx
+	movl	12(%esp), %eax
+	movl	(%edx), %ecx
+	movl	(%eax), %ebx
+	movl	%ebx, (%edx)
+	movl	%ecx, (%eax)
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+LFE12:
+	.p2align 4,,15
+	.globl	_partition
+	.def	_partition;	.scl	2;	.type	32;	.endef
+_partition:
+LFB13:
+	.cfi_startproc
+	pushl	%ebp
+	.cfi_def_cfa_offset 8
+	.cfi_offset 5, -8
+	pushl	%edi
+	.cfi_def_cfa_offset 12
+	.cfi_offset 7, -12
+	pushl	%esi
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	pushl	%ebx
+	.cfi_def_cfa_offset 20
+	.cfi_offset 3, -20
+	subl	$12, %esp
+	.cfi_def_cfa_offset 32
+	movl	36(%esp), %esi
+	movl	32(%esp), %eax
+	leal	(%eax,%esi,4), %eax
+	movl	%eax, 8(%esp)
+	movl	(%eax), %ecx
+	movl	40(%esp), %eax
+	cmpl	%eax, %esi
+	jge	L4
+	movl	%esi, %ebp
+	cmpl	%ebp, 40(%esp)
+	movl	%ecx, %esi
+	jle	L16
+	.p2align 4,,10
+L43:
+	cmpl	%esi, %ecx
+	movl	32(%esp), %edx
+	setge	%bl
+	movl	%ebx, %edi
+	leal	1(%ebp), %ebx
+	leal	(%edx,%ebx,4), %edx
+	movl	%edx, (%esp)
+	movl	%edi, %edx
+	testb	%dl, %dl
+	je	L16
+	movl	(%esp), %edx
+	movl	40(%esp), %edi
+	movl	%eax, (%esp)
+	jmp	L29
+	.p2align 4,,10
+L41:
+	cmpl	%ebx, %edi
+	jle	L36
+	addl	$1, %ebx
+L29:
+	movl	(%edx), %esi
+	movl	%edx, %eax
+	addl	$4, %edx
+	movl	%ebx, %ebp
+	cmpl	%esi, %ecx
+	jge	L41
+L36:
+	movl	%eax, 4(%esp)
+	movl	(%esp), %eax
+L15:
+	movl	32(%esp), %edi
+	leal	0(,%eax,4), %edx
+	addl	%edx, %edi
+	movl	(%edi), %ebx
+	cmpl	%ebx, %ecx
+	jge	L8
+	cmpl	%eax, 36(%esp)
+	jge	L8
+	movl	32(%esp), %edi
+	movl	%ebp, (%esp)
+	movl	36(%esp), %ebp
+	leal	-4(%edi,%edx), %edx
+	jmp	L9
+	.p2align 4,,10
+L42:
+	cmpl	%ebx, %ecx
+	jge	L37
+L9:
+	subl	$1, %eax
+	movl	(%edx), %ebx
+	movl	%edx, %edi
+	subl	$4, %edx
+	cmpl	%eax, %ebp
+	jl	L42
+L37:
+	movl	(%esp), %ebp
+L8:
+	cmpl	%eax, %ebp
+	jl	L11
+	movl	8(%esp), %esi
+	movl	(%esi), %ecx
+	movl	%ebx, (%esi)
+	movl	%ecx, (%edi)
+	addl	$12, %esp
+	.cfi_remember_state
+	.cfi_def_cfa_offset 20
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 16
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 12
+	popl	%edi
+	.cfi_restore 7
+	.cfi_def_cfa_offset 8
+	popl	%ebp
+	.cfi_restore 5
+	.cfi_def_cfa_offset 4
+	ret
+	.p2align 4,,10
+L11:
+	.cfi_restore_state
+	movl	4(%esp), %edx
+	cmpl	%ebp, 40(%esp)
+	movl	%ebx, (%edx)
+	movl	%esi, (%edi)
+	movl	32(%esp), %esi
+	movl	(%esi,%ebp,4), %esi
+	jg	L43
+L16:
+	movl	32(%esp), %edi
+	leal	(%edi,%ebp,4), %edi
+	movl	%edi, 4(%esp)
+	jmp	L15
+L4:
+	movl	%eax, %esi
+	movl	32(%esp), %eax
+	leal	(%eax,%esi,4), %edi
+	movl	%esi, %eax
+	movl	8(%esp), %esi
+	movl	(%edi), %ebx
+	movl	%ebx, (%esi)
+	movl	%ecx, (%edi)
+	addl	$12, %esp
+	.cfi_def_cfa_offset 20
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 16
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 12
+	popl	%edi
+	.cfi_restore 7
+	.cfi_def_cfa_offset 8
+	popl	%ebp
+	.cfi_restore 5
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+LFE13:
+	.p2align 4,,15
+	.globl	_quickSort
+	.def	_quickSort;	.scl	2;	.type	32;	.endef
+_quickSort:
+LFB14:
+	.cfi_startproc
+	pushl	%ebp
+	.cfi_def_cfa_offset 8
+	.cfi_offset 5, -8
+	pushl	%edi
+	.cfi_def_cfa_offset 12
+	.cfi_offset 7, -12
+	pushl	%esi
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	pushl	%ebx
+	.cfi_def_cfa_offset 20
+	.cfi_offset 3, -20
+	subl	$108, %esp
+	.cfi_def_cfa_offset 128
+	movl	136(%esp), %eax
+	cmpl	%eax, 132(%esp)
+	jge	L44
+L260:
+	movl	128(%esp), %eax
+	movl	132(%esp), %esi
+	leal	(%eax,%esi,4), %ecx
+	movl	136(%esp), %eax
+	movl	(%ecx), %ebp
+	movl	%eax, 40(%esp)
+	movl	132(%esp), %eax
+	movl	%ebp, %esi
+L46:
+	movl	128(%esp), %edi
+	leal	0(,%eax,4), %edx
+	addl	%edx, %edi
+	cmpl	%esi, %ebp
+	movl	%edi, 20(%esp)
+	jl	L55
+	cmpl	%eax, 136(%esp)
+	movl	128(%esp), %edi
+	leal	4(%edi,%edx), %edx
+	setg	%bl
+	testb	%bl, %bl
+	je	L55
+L273:
+	movl	(%edx), %esi
+	addl	$1, %eax
+	movl	%edx, 20(%esp)
+	addl	$4, %edx
+	cmpl	%eax, 136(%esp)
+	jle	L55
+	cmpl	%esi, %ebp
+	jge	L273
+L55:
+	movl	40(%esp), %edx
+	movl	128(%esp), %edi
+	leal	0(,%edx,4), %ebx
+	addl	%ebx, %edi
+	cmpl	%edx, 132(%esp)
+	movl	%ebx, 24(%esp)
+	movl	(%edi), %ebx
+	jge	L49
+	cmpl	%ebx, %ebp
+	jge	L49
+	movl	128(%esp), %edi
+	movl	24(%esp), %ebx
+	leal	-4(%edi,%ebx), %edx
+L50:
+	subl	$1, 40(%esp)
+	movl	(%edx), %ebx
+	movl	40(%esp), %edi
+	movl	%edx, 24(%esp)
+	subl	$4, %edx
+	cmpl	132(%esp), %edi
+	jle	L347
+	cmpl	%ebx, %ebp
+	jl	L50
+L347:
+	movl	24(%esp), %edi
+L49:
+	cmpl	%eax, 40(%esp)
+	jle	L52
+	movl	20(%esp), %edx
+	movl	%ebx, (%edx)
+	movl	%esi, (%edi)
+	movl	128(%esp), %esi
+	movl	(%esi,%eax,4), %esi
+	jmp	L46
+	.p2align 4,,10
+L132:
+	movl	32(%esp), %ecx
+	movl	(%ecx), %eax
+	movl	%edx, (%ecx)
+	movl	%eax, (%edi)
+	leal	-1(%ebx), %eax
+	movl	%eax, 8(%esp)
+	movl	132(%esp), %eax
+	movl	%eax, 4(%esp)
+	movl	128(%esp), %eax
+	movl	%eax, (%esp)
+	call	_quickSort
+	leal	1(%ebx), %eax
+	movl	%eax, 132(%esp)
+	movl	20(%esp), %eax
+	cmpl	132(%esp), %eax
+	jg	L268
+	movl	64(%esp), %eax
+L160:
+	addl	$1, %eax
+	movl	%eax, 132(%esp)
+	movl	36(%esp), %eax
+	cmpl	132(%esp), %eax
+	jg	L267
+L158:
+	movl	92(%esp), %eax
+	addl	$1, %eax
+	movl	%eax, 132(%esp)
+	movl	88(%esp), %eax
+	cmpl	132(%esp), %eax
+	jg	L266
+L156:
+	movl	60(%esp), %eax
+	addl	$1, %eax
+	movl	%eax, 132(%esp)
+	movl	84(%esp), %eax
+	cmpl	132(%esp), %eax
+	jg	L265
+L154:
+	movl	56(%esp), %eax
+	addl	$1, %eax
+	movl	%eax, 132(%esp)
+	movl	80(%esp), %eax
+	cmpl	132(%esp), %eax
+	jg	L264
+L152:
+	movl	52(%esp), %eax
+	addl	$1, %eax
+	movl	%eax, 132(%esp)
+	movl	76(%esp), %eax
+	cmpl	132(%esp), %eax
+	jg	L263
+L150:
+	movl	48(%esp), %eax
+	addl	$1, %eax
+	movl	%eax, 132(%esp)
+	movl	72(%esp), %eax
+	cmpl	132(%esp), %eax
+	jg	L262
+L148:
+	movl	44(%esp), %eax
+	addl	$1, %eax
+	movl	%eax, 132(%esp)
+	movl	68(%esp), %eax
+	cmpl	132(%esp), %eax
+	jg	L261
+L146:
+	movl	40(%esp), %eax
+	addl	$1, %eax
+	movl	%eax, 132(%esp)
+	movl	136(%esp), %eax
+	cmpl	%eax, 132(%esp)
+	jl	L260
+L44:
+	addl	$108, %esp
+	.cfi_remember_state
+	.cfi_def_cfa_offset 20
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 16
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 12
+	popl	%edi
+	.cfi_restore 7
+	.cfi_def_cfa_offset 8
+	popl	%ebp
+	.cfi_restore 5
+	.cfi_def_cfa_offset 4
+	ret
+L52:
+	.cfi_restore_state
+	movl	(%ecx), %eax
+	movl	%ebx, (%ecx)
+	movl	%eax, (%edi)
+	movl	40(%esp), %eax
+	subl	$1, %eax
+	cmpl	132(%esp), %eax
+	movl	%eax, 68(%esp)
+	jle	L146
+L261:
+	movl	128(%esp), %eax
+	movl	132(%esp), %esi
+	leal	(%eax,%esi,4), %ecx
+	movl	68(%esp), %eax
+	movl	(%ecx), %ebp
+	movl	%eax, 44(%esp)
+	movl	132(%esp), %eax
+	movl	%ebp, %esi
+L56:
+	movl	128(%esp), %edi
+	leal	0(,%eax,4), %edx
+	addl	%edx, %edi
+	cmpl	%eax, 68(%esp)
+	movl	%edi, 20(%esp)
+	jle	L65
+	cmpl	%esi, %ebp
+	movl	128(%esp), %edi
+	setge	%bl
+	testb	%bl, %bl
+	leal	4(%edi,%edx), %edx
+	je	L65
+L272:
+	movl	(%edx), %esi
+	addl	$1, %eax
+	movl	%edx, 20(%esp)
+	addl	$4, %edx
+	cmpl	%esi, %ebp
+	jl	L65
+	cmpl	%eax, 68(%esp)
+	jg	L272
+L65:
+	movl	44(%esp), %edx
+	movl	128(%esp), %edi
+	leal	0(,%edx,4), %ebx
+	addl	%ebx, %edi
+	movl	%ebx, 24(%esp)
+	movl	(%edi), %ebx
+	cmpl	%ebx, %ebp
+	jge	L59
+	cmpl	%edx, 132(%esp)
+	jge	L59
+	movl	128(%esp), %edi
+	movl	24(%esp), %ebx
+	leal	-4(%edi,%ebx), %edx
+L60:
+	subl	$1, 44(%esp)
+	movl	(%edx), %ebx
+	movl	44(%esp), %edi
+	movl	%edx, 24(%esp)
+	subl	$4, %edx
+	cmpl	132(%esp), %edi
+	jle	L350
+	cmpl	%ebx, %ebp
+	jl	L60
+L350:
+	movl	24(%esp), %edi
+L59:
+	cmpl	44(%esp), %eax
+	jge	L62
+	movl	20(%esp), %edx
+	movl	%ebx, (%edx)
+	movl	%esi, (%edi)
+	movl	128(%esp), %esi
+	movl	(%esi,%eax,4), %esi
+	jmp	L56
+L62:
+	movl	(%ecx), %eax
+	movl	%ebx, (%ecx)
+	movl	%eax, (%edi)
+	movl	44(%esp), %eax
+	subl	$1, %eax
+	cmpl	132(%esp), %eax
+	movl	%eax, 72(%esp)
+	jle	L148
+L262:
+	movl	128(%esp), %eax
+	movl	132(%esp), %esi
+	leal	(%eax,%esi,4), %ecx
+	movl	72(%esp), %eax
+	movl	(%ecx), %ebp
+	movl	%eax, 48(%esp)
+	movl	132(%esp), %eax
+	movl	%ebp, %esi
+L66:
+	movl	128(%esp), %edi
+	leal	0(,%eax,4), %edx
+	addl	%edx, %edi
+	cmpl	%esi, %ebp
+	movl	%edi, 20(%esp)
+	jl	L75
+	cmpl	%eax, 72(%esp)
+	movl	128(%esp), %edi
+	leal	4(%edi,%edx), %edx
+	setg	%bl
+	testb	%bl, %bl
+	je	L75
+L271:
+	movl	(%edx), %esi
+	addl	$1, %eax
+	movl	%edx, 20(%esp)
+	addl	$4, %edx
+	cmpl	%eax, 72(%esp)
+	jle	L75
+	cmpl	%esi, %ebp
+	jge	L271
+L75:
+	movl	48(%esp), %edx
+	movl	128(%esp), %edi
+	leal	0(,%edx,4), %ebx
+	addl	%ebx, %edi
+	movl	%ebx, 24(%esp)
+	movl	(%edi), %ebx
+	cmpl	%ebx, %ebp
+	jge	L69
+	cmpl	%edx, 132(%esp)
+	jge	L69
+	movl	128(%esp), %edi
+	movl	24(%esp), %ebx
+	leal	-4(%edi,%ebx), %edx
+L70:
+	subl	$1, 48(%esp)
+	movl	(%edx), %ebx
+	movl	48(%esp), %edi
+	movl	%edx, 24(%esp)
+	subl	$4, %edx
+	cmpl	132(%esp), %edi
+	jle	L353
+	cmpl	%ebx, %ebp
+	jl	L70
+L353:
+	movl	24(%esp), %edi
+L69:
+	cmpl	48(%esp), %eax
+	jge	L72
+	movl	20(%esp), %edx
+	movl	%ebx, (%edx)
+	movl	%esi, (%edi)
+	movl	128(%esp), %esi
+	movl	(%esi,%eax,4), %esi
+	jmp	L66
+L72:
+	movl	(%ecx), %eax
+	movl	%ebx, (%ecx)
+	movl	%eax, (%edi)
+	movl	48(%esp), %eax
+	subl	$1, %eax
+	cmpl	132(%esp), %eax
+	movl	%eax, 76(%esp)
+	jle	L150
+L263:
+	movl	128(%esp), %eax
+	movl	132(%esp), %esi
+	leal	(%eax,%esi,4), %ecx
+	movl	76(%esp), %eax
+	movl	(%ecx), %ebp
+	movl	%eax, 52(%esp)
+	movl	132(%esp), %eax
+	movl	%ebp, %esi
+L76:
+	movl	128(%esp), %edi
+	leal	0(,%eax,4), %edx
+	addl	%edx, %edi
+	cmpl	%esi, %ebp
+	movl	%edi, 20(%esp)
+	jl	L85
+	cmpl	%eax, 76(%esp)
+	movl	128(%esp), %edi
+	leal	4(%edi,%edx), %edx
+	setg	%bl
+	testb	%bl, %bl
+	je	L85
+L270:
+	movl	(%edx), %esi
+	addl	$1, %eax
+	movl	%edx, 20(%esp)
+	addl	$4, %edx
+	cmpl	%eax, 76(%esp)
+	jle	L85
+	cmpl	%esi, %ebp
+	jge	L270
+L85:
+	movl	52(%esp), %edx
+	movl	128(%esp), %edi
+	leal	0(,%edx,4), %ebx
+	addl	%ebx, %edi
+	movl	%ebx, 24(%esp)
+	movl	(%edi), %ebx
+	cmpl	%ebx, %ebp
+	jge	L79
+	cmpl	%edx, 132(%esp)
+	jge	L79
+	movl	128(%esp), %edi
+	movl	24(%esp), %ebx
+	leal	-4(%edi,%ebx), %edx
+L80:
+	subl	$1, 52(%esp)
+	movl	(%edx), %ebx
+	movl	52(%esp), %edi
+	movl	%edx, 24(%esp)
+	subl	$4, %edx
+	cmpl	132(%esp), %edi
+	jle	L356
+	cmpl	%ebx, %ebp
+	jl	L80
+L356:
+	movl	24(%esp), %edi
+L79:
+	cmpl	%eax, 52(%esp)
+	jle	L82
+	movl	20(%esp), %edx
+	movl	%ebx, (%edx)
+	movl	%esi, (%edi)
+	movl	128(%esp), %esi
+	movl	(%esi,%eax,4), %esi
+	jmp	L76
+L82:
+	movl	(%ecx), %eax
+	movl	%ebx, (%ecx)
+	movl	%eax, (%edi)
+	movl	52(%esp), %eax
+	subl	$1, %eax
+	cmpl	132(%esp), %eax
+	movl	%eax, 80(%esp)
+	jle	L152
+L264:
+	movl	128(%esp), %eax
+	movl	132(%esp), %esi
+	leal	(%eax,%esi,4), %ecx
+	movl	80(%esp), %eax
+	movl	(%ecx), %ebp
+	movl	%eax, 56(%esp)
+	movl	132(%esp), %eax
+	movl	%ebp, %esi
+L86:
+	movl	128(%esp), %edi
+	leal	0(,%eax,4), %edx
+	addl	%edx, %edi
+	cmpl	%esi, %ebp
+	movl	%edi, 20(%esp)
+	jl	L95
+	cmpl	%eax, 80(%esp)
+	movl	128(%esp), %edi
+	leal	4(%edi,%edx), %edx
+	setg	%bl
+	testb	%bl, %bl
+	jne	L269
+	jmp	L95
+	.p2align 4,,10
+L378:
+	cmpl	%esi, %ebp
+	jl	L95
+L269:
+	movl	(%edx), %esi
+	addl	$1, %eax
+	movl	%edx, 20(%esp)
+	addl	$4, %edx
+	cmpl	%eax, 80(%esp)
+	jg	L378
+L95:
+	movl	56(%esp), %edx
+	movl	128(%esp), %edi
+	leal	0(,%edx,4), %ebx
+	addl	%ebx, %edi
+	cmpl	%edx, 132(%esp)
+	movl	%ebx, 24(%esp)
+	movl	(%edi), %ebx
+	jge	L89
+	cmpl	%ebp, %ebx
+	jle	L89
+	movl	128(%esp), %edi
+	movl	24(%esp), %ebx
+	leal	-4(%edi,%ebx), %edx
+	jmp	L90
+	.p2align 4,,10
+L379:
+	cmpl	132(%esp), %edi
+	jle	L359
+L90:
+	movl	(%edx), %ebx
+	subl	$1, 56(%esp)
+	movl	%edx, 24(%esp)
+	subl	$4, %edx
+	movl	56(%esp), %edi
+	cmpl	%ebx, %ebp
+	jl	L379
+L359:
+	movl	24(%esp), %edi
+L89:
+	cmpl	%eax, 56(%esp)
+	jle	L92
+	movl	20(%esp), %edx
+	movl	%ebx, (%edx)
+	movl	%esi, (%edi)
+	movl	128(%esp), %esi
+	movl	(%esi,%eax,4), %esi
+	jmp	L86
+L92:
+	movl	(%ecx), %eax
+	movl	%ebx, (%ecx)
+	movl	%eax, (%edi)
+	movl	56(%esp), %eax
+	subl	$1, %eax
+	cmpl	132(%esp), %eax
+	movl	%eax, 84(%esp)
+	jle	L154
+L265:
+	movl	132(%esp), %esi
+	movl	128(%esp), %eax
+	leal	(%eax,%esi,4), %eax
+	movl	(%eax), %ebp
+	movl	%eax, 28(%esp)
+	movl	84(%esp), %eax
+	movl	%ebp, %esi
+	cmpl	%esi, %ebp
+	movl	%eax, 60(%esp)
+	movl	132(%esp), %eax
+	jl	L162
+L382:
+	cmpl	%eax, 84(%esp)
+	movl	128(%esp), %ecx
+	leal	1(%eax), %edx
+	leal	(%ecx,%edx,4), %ecx
+	setg	%bl
+	testb	%bl, %bl
+	jne	L297
+	jmp	L162
+	.p2align 4,,10
+L380:
+	cmpl	%esi, %ebp
+	jl	L105
+	addl	$1, %edx
+L297:
+	movl	(%ecx), %esi
+	movl	%ecx, %ebx
+	addl	$4, %ecx
+	cmpl	%edx, 84(%esp)
+	movl	%edx, %eax
+	jg	L380
+L105:
+	movl	60(%esp), %edx
+	leal	0(,%edx,4), %edi
+	movl	%edi, 20(%esp)
+	addl	128(%esp), %edi
+	movl	(%edi), %ecx
+	cmpl	%ecx, %ebp
+	jge	L99
+	cmpl	%edx, 132(%esp)
+	jge	L99
+	movl	20(%esp), %edi
+	movl	128(%esp), %ecx
+	movl	%eax, 20(%esp)
+	leal	-4(%ecx,%edi), %edx
+	jmp	L100
+	.p2align 4,,10
+L381:
+	cmpl	132(%esp), %ecx
+	jle	L363
+L100:
+	movl	(%edx), %eax
+	subl	$1, 60(%esp)
+	movl	%edx, %edi
+	subl	$4, %edx
+	movl	60(%esp), %ecx
+	cmpl	%eax, %ebp
+	movl	%eax, 24(%esp)
+	jl	L381
+L363:
+	movl	%eax, %ecx
+	movl	20(%esp), %eax
+L99:
+	cmpl	%eax, 60(%esp)
+	jle	L102
+	movl	%ecx, (%ebx)
+	movl	%esi, (%edi)
+	movl	128(%esp), %esi
+	movl	(%esi,%eax,4), %esi
+	cmpl	%esi, %ebp
+	jge	L382
+L162:
+	movl	128(%esp), %ecx
+	leal	(%ecx,%eax,4), %ebx
+	jmp	L105
+	.p2align 4,,10
+L102:
+	movl	28(%esp), %esi
+	movl	(%esi), %eax
+	movl	%ecx, (%esi)
+	movl	%eax, (%edi)
+	movl	60(%esp), %eax
+	subl	$1, %eax
+	cmpl	132(%esp), %eax
+	movl	%eax, 88(%esp)
+	jle	L156
+L266:
+	movl	132(%esp), %esi
+	movl	128(%esp), %eax
+	movl	132(%esp), %ebp
+	leal	(%eax,%esi,4), %eax
+	movl	(%eax), %edi
+	movl	%eax, 28(%esp)
+	movl	88(%esp), %eax
+	movl	%edi, %esi
+	cmpl	%esi, %edi
+	movl	%eax, %ebx
+	jl	L163
+L385:
+	cmpl	%ebp, 88(%esp)
+	movl	128(%esp), %eax
+	leal	1(%ebp), %edx
+	leal	(%eax,%edx,4), %eax
+	setg	%cl
+	testb	%cl, %cl
+	je	L163
+	movl	%ebx, 24(%esp)
+	movl	88(%esp), %ebx
+	jmp	L298
+L383:
+	cmpl	%edx, %ebx
+	jle	L366
+	addl	$1, %edx
+L298:
+	movl	(%eax), %esi
+	movl	%eax, %ecx
+	addl	$4, %eax
+	movl	%edx, %ebp
+	cmpl	%esi, %edi
+	jge	L383
+L366:
+	movl	24(%esp), %ebx
+	movl	%ecx, 20(%esp)
+L115:
+	movl	128(%esp), %ecx
+	leal	0(,%ebx,4), %eax
+	addl	%eax, %ecx
+	movl	(%ecx), %edx
+	cmpl	%edx, %edi
+	jge	L109
+	cmpl	%ebx, 132(%esp)
+	jge	L109
+	movl	128(%esp), %ecx
+	movl	%esi, 24(%esp)
+	movl	132(%esp), %esi
+	leal	-4(%ecx,%eax), %eax
+	jmp	L110
+L384:
+	cmpl	%esi, %ebx
+	jle	L367
+L110:
+	movl	(%eax), %edx
+	subl	$1, %ebx
+	movl	%eax, %ecx
+	subl	$4, %eax
+	cmpl	%edx, %edi
+	jl	L384
+L367:
+	movl	24(%esp), %esi
+L109:
+	cmpl	%ebp, %ebx
+	jle	L112
+	movl	20(%esp), %eax
+	movl	%edx, (%eax)
+	movl	128(%esp), %eax
+	movl	%esi, (%ecx)
+	movl	(%eax,%ebp,4), %esi
+	cmpl	%esi, %edi
+	jge	L385
+L163:
+	movl	128(%esp), %eax
+	leal	(%eax,%ebp,4), %eax
+	movl	%eax, 20(%esp)
+	jmp	L115
+	.p2align 4,,10
+L112:
+	movl	28(%esp), %esi
+	movl	%ebx, 92(%esp)
+	movl	(%esi), %eax
+	movl	%edx, (%esi)
+	movl	%eax, (%ecx)
+	movl	%ebx, %eax
+	subl	$1, %eax
+	cmpl	132(%esp), %eax
+	movl	%eax, 36(%esp)
+	jle	L158
+L267:
+	movl	132(%esp), %esi
+	movl	128(%esp), %eax
+	leal	(%eax,%esi,4), %eax
+	movl	%esi, %ebp
+	movl	(%eax), %ebx
+	movl	%eax, 28(%esp)
+	movl	36(%esp), %eax
+	movl	%ebx, %ecx
+	cmpl	%ecx, %ebx
+	movl	%eax, %edi
+	jl	L164
+L388:
+	cmpl	%ebp, 36(%esp)
+	leal	1(%ebp), %edx
+	setg	%al
+	movl	%eax, %esi
+	movl	128(%esp), %eax
+	leal	(%eax,%edx,4), %eax
+	movl	%eax, 20(%esp)
+	movl	%esi, %eax
+	testb	%al, %al
+	je	L164
+	movl	%edi, 24(%esp)
+	movl	20(%esp), %eax
+	movl	36(%esp), %edi
+	jmp	L299
+	.p2align 4,,10
+L386:
+	cmpl	%edx, %edi
+	jle	L370
+	addl	$1, %edx
+L299:
+	movl	(%eax), %ecx
+	movl	%eax, %esi
+	addl	$4, %eax
+	movl	%edx, %ebp
+	cmpl	%ecx, %ebx
+	jge	L386
+L370:
+	movl	24(%esp), %edi
+	movl	%esi, 20(%esp)
+L125:
+	movl	128(%esp), %esi
+	leal	0(,%edi,4), %eax
+	addl	%eax, %esi
+	movl	(%esi), %edx
+	cmpl	%edx, %ebx
+	jge	L119
+	cmpl	%edi, 132(%esp)
+	jge	L119
+	movl	128(%esp), %esi
+	movl	%ebp, 24(%esp)
+	movl	132(%esp), %ebp
+	leal	-4(%esi,%eax), %eax
+	jmp	L120
+	.p2align 4,,10
+L387:
+	cmpl	%edx, %ebx
+	jge	L371
+L120:
+	subl	$1, %edi
+	movl	(%eax), %edx
+	movl	%eax, %esi
+	subl	$4, %eax
+	cmpl	%ebp, %edi
+	jg	L387
+L371:
+	movl	24(%esp), %ebp
+L119:
+	cmpl	%edi, %ebp
+	jge	L122
+	movl	20(%esp), %eax
+	movl	%edx, (%eax)
+	movl	128(%esp), %eax
+	movl	%ecx, (%esi)
+	movl	(%eax,%ebp,4), %ecx
+	cmpl	%ecx, %ebx
+	jge	L388
+L164:
+	movl	128(%esp), %eax
+	leal	(%eax,%ebp,4), %eax
+	movl	%eax, 20(%esp)
+	jmp	L125
+L122:
+	movl	28(%esp), %ecx
+	movl	%edi, 64(%esp)
+	movl	(%ecx), %eax
+	movl	%edx, (%ecx)
+	movl	%eax, (%esi)
+	movl	%edi, %eax
+	subl	$1, %eax
+	cmpl	132(%esp), %eax
+	movl	%eax, 20(%esp)
+	jle	L389
+	.p2align 4,,10
+L268:
+	movl	132(%esp), %esi
+	movl	128(%esp), %eax
+	movl	20(%esp), %ebx
+	movl	132(%esp), %ebp
+	leal	(%eax,%esi,4), %eax
+	movl	(%eax), %esi
+	movl	%eax, 32(%esp)
+	movl	%esi, %ecx
+	cmpl	%ecx, %esi
+	jl	L165
+	.p2align 4,,10
+L392:
+	cmpl	%ebp, 20(%esp)
+	movl	128(%esp), %edx
+	setg	%al
+	movl	%eax, %edi
+	leal	1(%ebp), %eax
+	leal	(%edx,%eax,4), %edx
+	movl	%edx, 24(%esp)
+	movl	%edi, %edx
+	testb	%dl, %dl
+	je	L165
+	movl	%ebx, 28(%esp)
+	movl	24(%esp), %edx
+	movl	20(%esp), %ebx
+	jmp	L300
+	.p2align 4,,10
+L390:
+	cmpl	%ecx, %esi
+	jl	L374
+	addl	$1, %eax
+L300:
+	movl	(%edx), %ecx
+	movl	%edx, %edi
+	addl	$4, %edx
+	cmpl	%eax, %ebx
+	movl	%eax, %ebp
+	jg	L390
+L374:
+	movl	28(%esp), %ebx
+	movl	%edi, 24(%esp)
+L135:
+	movl	128(%esp), %edi
+	leal	0(,%ebx,4), %eax
+	addl	%eax, %edi
+	cmpl	%ebx, 132(%esp)
+	movl	(%edi), %edx
+	jge	L129
+	cmpl	%esi, %edx
+	jle	L129
+	movl	128(%esp), %edi
+	movl	%ebp, 28(%esp)
+	movl	132(%esp), %ebp
+	leal	-4(%edi,%eax), %eax
+	jmp	L130
+	.p2align 4,,10
+L391:
+	cmpl	%edx, %esi
+	jge	L375
+L130:
+	subl	$1, %ebx
+	movl	(%eax), %edx
+	movl	%eax, %edi
+	subl	$4, %eax
+	cmpl	%ebp, %ebx
+	jg	L391
+L375:
+	movl	28(%esp), %ebp
+L129:
+	cmpl	%ebp, %ebx
+	jle	L132
+	movl	24(%esp), %eax
+	movl	%edx, (%eax)
+	movl	128(%esp), %eax
+	movl	%ecx, (%edi)
+	movl	(%eax,%ebp,4), %ecx
+	cmpl	%ecx, %esi
+	jge	L392
+L165:
+	movl	128(%esp), %eax
+	leal	(%eax,%ebp,4), %eax
+	movl	%eax, 24(%esp)
+	jmp	L135
+L389:
+	movl	%edi, %eax
+	jmp	L160
+	.cfi_endproc
+LFE14:
+	.def	___main;	.scl	2;	.type	32;	.endef
+	.section .rdata,"dr"
+LC0:
+	.ascii "Original array: \0"
+LC1:
+	.ascii "%d \0"
+LC2:
+	.ascii "\12Sorted array: \0"
+	.section	.text.startup,"x"
+	.p2align 4,,15
+	.globl	_main
+	.def	_main;	.scl	2;	.type	32;	.endef
+_main:
+LFB15:
+	.cfi_startproc
+	pushl	%ebp
+	.cfi_def_cfa_offset 8
+	.cfi_offset 5, -8
+	movl	%esp, %ebp
+	.cfi_def_cfa_register 5
+	pushl	%edi
+	pushl	%esi
+	pushl	%ebx
+	andl	$-16, %esp
+	subl	$64, %esp
+	.cfi_offset 7, -12
+	.cfi_offset 6, -16
+	.cfi_offset 3, -20
+	leal	28(%esp), %edi
+	leal	64(%esp), %esi
+	call	___main
+	movl	%edi, %ebx
+	movl	$LC0, (%esp)
+	movl	$19, 28(%esp)
+	movl	$17, 32(%esp)
+	movl	$15, 36(%esp)
+	movl	$12, 40(%esp)
+	movl	$16, 44(%esp)
+	movl	$18, 48(%esp)
+	movl	$4, 52(%esp)
+	movl	$11, 56(%esp)
+	movl	$13, 60(%esp)
+	call	_printf
+	.p2align 4,,10
+L394:
+	movl	(%ebx), %eax
+	movl	$LC1, (%esp)
+	addl	$4, %ebx
+	movl	%eax, 4(%esp)
+	call	_printf
+	cmpl	%esi, %ebx
+	jne	L394
+	leal	28(%esp), %eax
+	movl	$8, 8(%esp)
+	movl	$0, 4(%esp)
+	movl	%eax, (%esp)
+	call	_quickSort
+	movl	$LC2, (%esp)
+	call	_printf
+	.p2align 4,,10
+L395:
+	movl	(%edi), %eax
+	movl	$LC1, (%esp)
+	addl	$4, %edi
+	movl	%eax, 4(%esp)
+	call	_printf
+	cmpl	%ebx, %edi
+	jne	L395
+	leal	-12(%ebp), %esp
+	xorl	%eax, %eax
+	popl	%ebx
+	.cfi_restore 3
+	popl	%esi
+	.cfi_restore 6
+	popl	%edi
+	.cfi_restore 7
+	popl	%ebp
+	.cfi_restore 5
+	.cfi_def_cfa 4, 4
+	ret
+	.cfi_endproc
+LFE15:
+	.ident	"GCC: (MinGW.org GCC-6.3.0-1) 6.3.0"
+	.def	_printf;	.scl	2;	.type	32;	.endef

@@ -1,0 +1,11 @@
+12321421
+idogbsiog
+352351
+rgewrhew
+35325243
+do
+dfoigoi
+230583205
+{DIGIT}+ {printf("Integer: %s\n", yytext);}
+{STRING}+ {printf("STRING: %s\n", STRING);}
+.|\n {printf("\n");}

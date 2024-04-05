@@ -1,0 +1,21 @@
+09424820 helloworld
+    hello world do
+{
+    /* code */
+}
+while (/* condition */)
+    ;
+
+140812048 djbgoind2094204
+    idnfoasindf
+`0149240482 do
+{
+    /* code */
+}
+while (
+
+    do do do
+
+)
+    ;
+"do" { printf("%s\n", DO); }
