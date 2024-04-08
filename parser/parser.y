@@ -1,9 +1,42 @@
 %{
 #include <stdio.h>
+#include "treeDefinitions.h"
+
 int current_line_number = 1;
 #define yywrap() 1
 
 int yylex();
+
+expresstionTree root;
+
+
+expresstionTree operatorExpression(optype op, expresstionTree left, expresstionTree right){
+    expresstionTree retval = (expresstionTree) malloc(sizeof(struct expression));
+
+    retval->kind = operatorExp;
+    retval->u.oper.op = op;
+    retval->u.oper.left = left;
+    retval->u.oper.right = right;
+
+    return retval;
+}
+expresstionTree IdentifierExpression(char *variable){
+    expresstionTree retval = (expresstionTree) malloc(sizeof(struct expression));
+
+    retval->kind = variableExp;
+    retval->u.variable = variable;
+
+    return retval;
+
+}
+expresstionTree ConstantExpression(int constantVal){
+    expresstionTree retval = (expresstionTree) malloc(sizeof(struct expression));
+
+    retval->kind = constantExp;
+    retval->u.constantVal = constantVal;
+
+    return retval;
+}
 
 
 %}

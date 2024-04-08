@@ -1,0 +1,29 @@
+%%
+input: 
+| line input;
+line : exp EOL  {root = $1; printTree(root);}
+| EOL 
+exp : exp PLUS term {$$ = operatorExpression(PlusOp, $1, $3, $1->line_number); }
+exp : exp MINUS term {$$ = operatorExpression(MinusOp, $1, $3, $1->line_number ); }
+exp : term {$$ = $1;}
+term : term TIMES INTEGER_LITERAL {$$ = operatorExpression(TimesOp, $1, ConstantExpression($3.value, $3.line_number), $1->line_number ); }
+term : term DIVIDE INTEGER_LITERAL {$$ = operatorExpression(DivideOp, $1, ConstantExpression($3.value, $3.line_number), $1->line_number ); }
+term : INTEGER_LITERAL {$$ = ConstantExpression($1.value, $1.line_number);}
+
+%%
+
+
+
+
+
+%%
+input: 
+| line input;
+line : exp EOL  {root = $1; printDriver(); }
+| EOL 
+exp : exp PLUS term {$$ = operatorExpression(PlusOp, $1, $3, $1->line_number); }
+exp : exp MINUS term {$$ = operatorExpression(MinusOp, $1, $3, $1->line_number ); }
+exp : term {$$ = $1;}
+term : INTEGER_LITERAL {$$ = ConstantExpression($1.value, $1.line_number);}
+
+%%
